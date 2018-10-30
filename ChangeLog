@@ -1,3 +1,6 @@
+2018-10-30         [RELEASE] Release of hide_used_content 0.2.0 (Nicole Cordes)
+2018-10-30 d45818c [FEATURE] Use RelationHandler to evaluate relations more accurate (Nicole Cordes)
+
 2018-10-30         [RELEASE] Release of hide_used_content 0.1.0 (Nicole Cordes)
 2018-10-30 0f6741c [FEATURE] Add basic PageLayoutViewHook to remove used elements (Nicole Cordes)
 2018-10-30 47cf9c9 [FEATURE] Add slot for TCA processing (Nicole Cordes)
