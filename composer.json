@@ -24,6 +24,11 @@
     "require-dev": {
         "nimut/testing-framework": "4.x-dev"
     },
+    "autoload": {
+        "psr-4": {
+            "IchHabRecht\\HideUsedContent\\": "Classes/"
+        }
+    },
     "replace": {
         "hide_used_content": "self.version",
         "typo3-ter/hide-used-content": "self.version"
