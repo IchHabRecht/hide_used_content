@@ -1,3 +1,7 @@
+2020-06-25         [RELEASE] Release of hide_used_content 1.0.0 (Nicole Cordes)
+2020-06-25 1d8bdfc [TASK] Update supporting files to EXT:my_skeleton 0.3.2 (Nicole Cordes)
+2020-06-25 0210a68 [TASK] Declare TYPO3 10 compatibility (Ludwig Rafelsberger)
+
 2018-10-30         [RELEASE] Release of hide_used_content 0.2.0 (Nicole Cordes)
 2018-10-30 d45818c [FEATURE] Use RelationHandler to evaluate relations more accurate (Nicole Cordes)
 
