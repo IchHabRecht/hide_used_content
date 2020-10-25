@@ -19,6 +19,7 @@
         }
     ],
     "require": {
+        "php": ">= 7.2, < 7.5",
         "typo3/cms-core": "^9.5 || ^10.4"
     },
     "require-dev": {
@@ -30,7 +31,6 @@
         }
     },
     "replace": {
-        "hide_used_content": "self.version",
         "typo3-ter/hide-used-content": "self.version"
     },
     "config": {

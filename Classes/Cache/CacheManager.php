@@ -1,5 +1,7 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
+
 namespace IchHabRecht\HideUsedContent\Cache;
 
 use TYPO3\CMS\Core\Cache\Frontend\PhpFrontend;
