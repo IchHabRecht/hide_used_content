@@ -1,13 +1,12 @@
 <?php
-
-declare(strict_types=1);
-
-namespace IchHabRecht\HideUsedContent\Slot;
+declare(strict_types = 1);
+namespace IchHabRecht\HideUsedContent\Listener;
 
 use IchHabRecht\HideUsedContent\Cache\CacheManager;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Core\Configuration\Event\AfterTcaCompilationEvent;
 
-class TcaColPosSlot
+class TcaColPosListener
 {
     /**
      * @var CacheManager
@@ -17,6 +16,11 @@ class TcaColPosSlot
     public function __construct(CacheManager $cache = null)
     {
         $this->cacheManager = $cache ?: GeneralUtility::makeInstance(CacheManager::class);
+    }
+
+    public function __invoke(AfterTcaCompilationEvent $event)
+    {
+        $this->initializeColPosCache($event->getTca());
     }
 
     public function initializeColPosCache($tca): array
