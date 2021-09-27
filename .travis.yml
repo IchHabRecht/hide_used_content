@@ -24,6 +24,8 @@ jobs:
     fast_finish: true
     allow_failures:
         -   if: type != cron
+            env: TYPO3=11.5.x-dev
+        -   if: type != cron
             env: TYPO3=10.4.x-dev
         -   if: type != cron
             env: TYPO3=9.5.x-dev
@@ -69,6 +71,15 @@ jobs:
                     echo;
                     echo;
                     find . -name \*.php ! -path "./.Build/*" | parallel --gnu php -d display_errors=stderr -l {} > /dev/null \;;
+            php: 8.1.0
+            env: TYPO3=^11.5
+        -   <<: *tests
+            php: 8.0
+            env: TYPO3=^11.5
+        -   <<: *tests
+            php: 7.4
+            env: TYPO3=^11.5
+        -   <<: *tests
             php: 7.4
             env: TYPO3=^10.4
         -   <<: *tests
@@ -115,7 +126,7 @@ jobs:
             git:
                 depth: false
             php: 7.4
-            env: TYPO3="^9.5 ^10.4"
+            env: TYPO3="^9.5 ^10.4 ^11.5"
             before_install:
                 - nvm install 12
                 - nvm use 12
@@ -186,6 +197,15 @@ jobs:
                 - composer config minimum-stability dev
                 - composer config prefer-stable true
                 - composer require --no-progress --no-suggest --no-update typo3/cms-core:"@dev"
+            php: 8.1.0
+            env: TYPO3=11.5.x-dev
+        -   <<: *dev-tests
+            php: 8.0
+            env: TYPO3=11.5.x-dev
+        -   <<: *dev-tests
+            php: 7.4
+            env: TYPO3=11.5.x-dev
+        -   <<: *dev-tests
             php: 7.4
             env: TYPO3=10.4.x-dev
         -   <<: *dev-tests
@@ -212,6 +232,24 @@ jobs:
                 - composer require --no-progress --no-suggest --no-update --prefer-lowest nimut/typo3-complete:"$TYPO3"
                 - composer update
                 - git checkout composer.json
+            php: 8.1.0
+            env: TYPO3=^11.5
+        -   <<: *lowest-tests
+            php: 8.1.0
+            env: TYPO3=11.5.x-dev
+        -   <<: *lowest-tests
+            php: 8.0
+            env: TYPO3=^11.5
+        -   <<: *lowest-tests
+            php: 8.0
+            env: TYPO3=11.5.x-dev
+        -   <<: *lowest-tests
+            php: 7.4
+            env: TYPO3=^11.5
+        -   <<: *lowest-tests
+            php: 7.4
+            env: TYPO3=11.5.x-dev
+        -   <<: *lowest-tests
             php: 7.4
             env: TYPO3=^10.4
         -   <<: *lowest-tests

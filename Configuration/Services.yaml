@@ -1,0 +1,6 @@
+services:
+  IchHabRecht\HideUsedContent\EventListener\TcaColPosEventListener:
+    tags:
+      - name: event.listener
+        identifier: 'tcaColPosListener'
+        event: TYPO3\CMS\Core\Configuration\Event\AfterTcaCompilationEvent

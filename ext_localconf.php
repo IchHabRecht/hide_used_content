@@ -7,7 +7,7 @@ call_user_func(function () {
     $dispatcher->connect(
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::class,
         'tcaIsBeingBuilt',
-        \IchHabRecht\HideUsedContent\Slot\TcaColPosSlot::class,
+        \IchHabRecht\HideUsedContent\EventListener\TcaColPosEventListener::class,
         'initializeColPosCache'
     );
 
