@@ -1,10 +1,12 @@
 <?php
-declare(strict_types = 1);
+
+declare(strict_types=1);
+
 namespace IchHabRecht\HideUsedContent\Listener;
 
 use IchHabRecht\HideUsedContent\Cache\CacheManager;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Core\Configuration\Event\AfterTcaCompilationEvent;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class TcaColPosListener
 {
