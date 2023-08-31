@@ -1,4 +1,4 @@
-dist: xenial
+dist: bionic
 
 language: php
 
@@ -11,7 +11,7 @@ addons:
 
 cache:
     directories:
-        - $HOME/.composer/cache
+        - $HOME/.config/composer/cache
         - $HOME/.sonar/cache
 
 jdk:
@@ -89,14 +89,17 @@ jobs:
 
         -   stage: 🚢 to ter
             if: tag IS present AND env(TYPO3_ORG_USERNAME) IS present AND env(TYPO3_ORG_PASSWORD) IS present
-            php: 7.0
+            php: 7.4
+            before_install:
+                - sudo sed 's/mozilla.DST_Root_CA_X3.crt/!mozilla\/DST_Root_CA_X3.crt/' -i /etc/ca-certificates.conf
+                - sudo update-ca-certificates
             script:
                 - >
                     echo;
                     echo "Preparing upload of release ${TRAVIS_TAG} to TER";
                     echo;
                     echo;
-                    composer global require helhum/ter-client;
+                    composer global require typo3/tailor;
 
                 - >
                     TAG_MESSAGE=`git tag -n10 -l $TRAVIS_TAG | sed 's/^[0-9.]*[ ]*//g'`;
@@ -104,14 +107,18 @@ jobs:
                     echo "Uploading release ${TRAVIS_TAG} to TER";
                     echo;
                     echo;
-                    $HOME/.composer/vendor/bin/ter-client upload hide_used_content . -u "$TYPO3_ORG_USERNAME" -p "$TYPO3_ORG_PASSWORD" -m "$TAG_MESSAGE";
+                    PATH=$PATH:$(composer global config bin-dir --absolute --quiet);
+                    TYPO3_API_USERNAME="$TYPO3_ORG_USERNAME" TYPO3_API_PASSWORD="$TYPO3_ORG_PASSWORD" tailor ter:publish --comment "$TAG_MESSAGE" ${TRAVIS_TAG} hide_used_content;
 
         -   stage: ✔ with sonarqube scanner
-            if: type = push AND branch IN (master, pre-merge) AND env(SONAR_TOKEN) IS present AND fork = false
+            if: type = push AND branch IN (main, pre-merge) AND env(SONAR_TOKEN) IS present AND fork = false
             git:
                 depth: false
-            php: 7.2
+            php: 7.4
             env: TYPO3="^9.5 ^10.4"
+            before_install:
+                - nvm install 12
+                - nvm use 12
             before_script:
                 - mkdir -p .Log/coverage/ .Log/junit/
                 - export TYPO3_PATH_WEB=$PWD/.Build/public
@@ -158,7 +165,8 @@ jobs:
                         echo "Merging log and coverage files";
                         echo;
                         echo;
-                        composer require --no-progress --no-suggest --update-with-all-dependencies nimut/phpunit-merger;
+                        composer require --no-progress --no-suggest --no-update nimut/phpunit-merger;
+                        composer update;
                         .Build/bin/phpunit-merger coverage .Log/coverage/ .Log/coverage.xml;
                         .Build/bin/phpunit-merger log .Log/junit/ .Log/junit.xml;
                     fi
