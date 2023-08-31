@@ -1,3 +1,8 @@
+2023-08-31         [RELEASE] Release of hide_used_content 1.1.0 (Nicole Cordes)
+2021-09-27 1c4255b Add compatibility to TYPO3 11.5 (Marco Kuprat)
+2023-08-31 7f44477 [TASK] Update supporting files to EXT:my_skeleton 0.7.2 (Nicole Cordes)
+2020-10-25 7bf8e07 [TASK] Update supporting files to EXT:my_skeleton 0.5.0 (Nicole Cordes)
+
 2020-06-25         [RELEASE] Release of hide_used_content 1.0.0 (Nicole Cordes)
 2020-06-25 1d8bdfc [TASK] Update supporting files to EXT:my_skeleton 0.3.2 (Nicole Cordes)
 2020-06-25 0210a68 [TASK] Declare TYPO3 10 compatibility (Ludwig Rafelsberger)
