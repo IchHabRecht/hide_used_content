@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace IchHabRecht\HideUsedContent\Hooks;
 
-use IchHabRecht\HideUsedContent\Cache\CacheManager;
 use TYPO3\CMS\Core\Database\RelationHandler;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 
@@ -15,13 +14,9 @@ class PageLayoutViewHook
      */
     protected $columnConfiguration;
 
-    public function __construct(CacheManager $cacheManager = null)
+    public function __construct()
     {
-        if ($cacheManager === null) {
-            $cacheManager = GeneralUtility::makeInstance(CacheManager::class);
-        }
-
-        $this->columnConfiguration = $cacheManager->get();
+        $this->columnConfiguration = $GLOBALS['TCA']['pages']['_hide_used_content_configuration'];
     }
 
     public function hideUsedContent(array $parameter): bool

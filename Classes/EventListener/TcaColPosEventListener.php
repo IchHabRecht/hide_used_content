@@ -4,22 +4,10 @@ declare(strict_types=1);
 
 namespace IchHabRecht\HideUsedContent\EventListener;
 
-use IchHabRecht\HideUsedContent\Cache\CacheManager;
 use TYPO3\CMS\Core\Configuration\Event\AfterTcaCompilationEvent;
-use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 class TcaColPosEventListener
 {
-    /**
-     * @var CacheManager
-     */
-    protected $cacheManager;
-
-    public function __construct(CacheManager $cache = null)
-    {
-        $this->cacheManager = $cache ?: GeneralUtility::makeInstance(CacheManager::class);
-    }
-
     public function __invoke(AfterTcaCompilationEvent $event)
     {
         $this->initializeColPosCache($event->getTca());
@@ -49,8 +37,7 @@ class TcaColPosEventListener
                 $configuration[$colPos][$table][] = $field;
             }
         }
-
-        $this->cacheManager->set($configuration);
+        $tca['pages']['_hide_used_content_configuration'] = $configuration;
 
         return [$tca];
     }
